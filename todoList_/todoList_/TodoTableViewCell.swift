@@ -9,9 +9,19 @@ import UIKit
 
 class TodoTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var todoText: UITextView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    @IBAction func checkButtonTapped(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+        }else {
+            sender.isSelected = true
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
