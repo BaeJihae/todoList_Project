@@ -16,17 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-wQ-neZ">
-                                <rect key="frame" x="10" y="69" width="373" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todo List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9V-du-TFz" userLabel="Todo List">
+                                <rect key="frame" x="10" y="59" width="373" height="35.666666666666657"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="29"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.03.18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-wQ-neZ">
+                                <rect key="frame" x="10" y="97.666666666666671" width="373" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6Ge-IZ-uGF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h3J-Wx-g5X">
-                                <rect key="frame" x="10" y="109" width="373" height="709"/>
+                                <rect key="frame" x="10" y="132.66666666666669" width="373" height="685.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoTableViewCell" id="0we-Ib-ENV" customClass="TodoTableViewCell" customModule="todoList_" customModuleProvider="target">
@@ -50,25 +56,31 @@
                                                         <action selector="checkButtonTapped:" destination="0we-Ib-ENV" eventType="touchUpInside" id="zf5-Bj-w4I"/>
                                                     </connections>
                                                 </button>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="text" translatesAutoresizingMaskIntoConstraints="NO" id="vs0-11-QdI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-u3-bfU" userLabel="Todo Text">
                                                     <rect key="frame" x="50" y="5" width="323" height="35"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <color key="textColor" systemColor="labelColor"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="text">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="18"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="g0D-LF-ubR" firstAttribute="centerY" secondItem="1hn-HV-inl" secondAttribute="centerY" id="BYw-Ep-lal"/>
-                                                <constraint firstAttribute="trailing" secondItem="vs0-11-QdI" secondAttribute="trailing" id="EST-lJ-Q4d"/>
                                                 <constraint firstItem="g0D-LF-ubR" firstAttribute="leading" secondItem="1hn-HV-inl" secondAttribute="leading" constant="10" id="Lkq-h6-yem"/>
-                                                <constraint firstItem="vs0-11-QdI" firstAttribute="height" secondItem="g0D-LF-ubR" secondAttribute="height" id="RfD-QO-GpP"/>
-                                                <constraint firstItem="vs0-11-QdI" firstAttribute="centerY" secondItem="1hn-HV-inl" secondAttribute="centerY" id="XJq-md-fVM"/>
-                                                <constraint firstItem="vs0-11-QdI" firstAttribute="leading" secondItem="g0D-LF-ubR" secondAttribute="trailing" constant="5" id="rsc-ac-sU8"/>
+                                                <constraint firstItem="ArF-u3-bfU" firstAttribute="centerY" secondItem="1hn-HV-inl" secondAttribute="centerY" id="NLx-DC-4YH"/>
+                                                <constraint firstAttribute="trailing" secondItem="ArF-u3-bfU" secondAttribute="trailing" id="l5Y-uN-Q1k"/>
+                                                <constraint firstItem="ArF-u3-bfU" firstAttribute="height" secondItem="g0D-LF-ubR" secondAttribute="height" id="lZN-d3-Lw2"/>
+                                                <constraint firstItem="ArF-u3-bfU" firstAttribute="leading" secondItem="g0D-LF-ubR" secondAttribute="trailing" constant="5" id="wSK-9Q-1Ev"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="todoText" destination="vs0-11-QdI" id="e4j-DQ-JwN"/>
+                                            <outlet property="todoText" destination="ArF-u3-bfU" id="Rqy-PK-yZC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -77,13 +89,16 @@
                         <viewLayoutGuide key="safeArea" id="Fkf-ab-2zl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="f9V-du-TFz" firstAttribute="top" secondItem="Fkf-ab-2zl" secondAttribute="top" id="6sZ-cM-xxo"/>
                             <constraint firstItem="h3J-Wx-g5X" firstAttribute="leading" secondItem="Fkf-ab-2zl" secondAttribute="leading" constant="10" id="EAt-yJ-Iwa"/>
                             <constraint firstItem="zgK-wQ-neZ" firstAttribute="leading" secondItem="Fkf-ab-2zl" secondAttribute="leading" constant="10" id="Gqo-A0-mgc"/>
                             <constraint firstItem="Fkf-ab-2zl" firstAttribute="bottom" secondItem="h3J-Wx-g5X" secondAttribute="bottom" id="Jh4-fK-pcG"/>
                             <constraint firstItem="Fkf-ab-2zl" firstAttribute="trailing" secondItem="h3J-Wx-g5X" secondAttribute="trailing" constant="10" id="R26-CI-cEU"/>
-                            <constraint firstItem="zgK-wQ-neZ" firstAttribute="top" secondItem="Fkf-ab-2zl" secondAttribute="top" constant="10" id="T8c-8o-ilU"/>
+                            <constraint firstItem="Fkf-ab-2zl" firstAttribute="trailing" secondItem="f9V-du-TFz" secondAttribute="trailing" constant="10" id="Rg2-bS-Zps"/>
+                            <constraint firstItem="f9V-du-TFz" firstAttribute="leading" secondItem="Fkf-ab-2zl" secondAttribute="leading" constant="10" id="bog-qG-PGv"/>
                             <constraint firstItem="Fkf-ab-2zl" firstAttribute="trailing" secondItem="zgK-wQ-neZ" secondAttribute="trailing" constant="10" id="gnV-nX-Ug8"/>
-                            <constraint firstItem="h3J-Wx-g5X" firstAttribute="top" secondItem="zgK-wQ-neZ" secondAttribute="bottom" constant="10" id="yQf-iD-lMK"/>
+                            <constraint firstItem="zgK-wQ-neZ" firstAttribute="top" secondItem="f9V-du-TFz" secondAttribute="bottom" constant="3" id="kfk-EZ-qMq"/>
+                            <constraint firstItem="h3J-Wx-g5X" firstAttribute="top" secondItem="zgK-wQ-neZ" secondAttribute="bottom" constant="5" id="yQf-iD-lMK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -93,15 +108,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-535.1145038167939" y="-48.591549295774648"/>
+            <point key="canvasLocation" x="-733.58778625954199" y="-54.225352112676056"/>
         </scene>
     </scenes>
     <resources>
         <image name="check (1)" width="256" height="256"/>
         <image name="checkbox" width="256" height="256"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

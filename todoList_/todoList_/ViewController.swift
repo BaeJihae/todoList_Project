@@ -40,7 +40,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func setting() {
         tableview.dataSource = self
         tableview.delegate = self
-        tableview.rowHeight = 70
+        tableview.rowHeight = 60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 리턴되는 테이블 뷰 개수
@@ -51,6 +51,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableViewCell", for: indexPath) as! TodoTableViewCell
         
         cell.todoText.text = tododataArray[indexPath.row].title
+        cell.selectionStyle = .none
+        
         return cell
     }
 }
