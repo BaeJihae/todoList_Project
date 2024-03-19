@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
     var tododataArray: [TodoData] = [
         TodoData(id: 0, title: "안녕하세요", isChecked: false),
         TodoData(id: 1, title: "오잉?", isChecked: false),
@@ -34,6 +36,34 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setting()
+        title = "Todo List"
+    }
+    
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+        if self.tableview.isEditing {
+            self.editButton.title = "Edit"
+            self.tableview.setEditing(false, animated: true)
+        } else {
+            self.editButton.title = "Done"
+            self.tableview.setEditing(true, animated: true)
+        }
+    }
+    
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Add", message: "해야 할 일을 입력해주세요.",
+                                      preferredStyle: .alert)
+        alert.addTextField{ tf in
+            tf.placeholder = "to do"
+        }
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+            guard let text = alert.textFields?[0].text else {return}
+            if text != "" {
+                self.tododataArray.append(TodoData(title: text, isChecked: false))
+                self.tableview.reloadData()
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -55,4 +85,5 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    
 }

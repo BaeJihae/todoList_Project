@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hWU-0y-ik7">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todo List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9V-du-TFz" userLabel="Todo List">
-                                <rect key="frame" x="10" y="59" width="373" height="35.666666666666657"/>
+                                <rect key="frame" x="10" y="103" width="373" height="35.666666666666657"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.03.18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-wQ-neZ">
-                                <rect key="frame" x="10" y="97.666666666666671" width="373" height="30"/>
+                                <rect key="frame" x="10" y="141.66666666666666" width="373" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6Ge-IZ-uGF"/>
                                 </constraints>
@@ -32,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h3J-Wx-g5X">
-                                <rect key="frame" x="10" y="132.66666666666669" width="373" height="685.33333333333326"/>
+                                <rect key="frame" x="10" y="176.66666666666669" width="373" height="641.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoTableViewCell" id="0we-Ib-ENV" customClass="TodoTableViewCell" customModule="todoList_" customModuleProvider="target">
@@ -101,19 +102,55 @@
                             <constraint firstItem="h3J-Wx-g5X" firstAttribute="top" secondItem="zgK-wQ-neZ" secondAttribute="bottom" constant="5" id="yQf-iD-lMK"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Syr-Dq-L7J">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" id="hxb-CC-Kmh">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="e8T-Ke-P47"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="done" id="RrL-P6-O5Z">
+                            <color key="tintColor" name="AccentColor"/>
+                            <connections>
+                                <action selector="editButtonTapped:" destination="BYZ-38-t0r" id="Ovt-jW-uua"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="date" destination="zgK-wQ-neZ" id="H90-ct-cr3"/>
+                        <outlet property="editButton" destination="RrL-P6-O5Z" id="FnH-nZ-A43"/>
                         <outlet property="tableview" destination="h3J-Wx-g5X" id="eFc-Cb-Fum"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-733.58778625954199" y="-54.225352112676056"/>
+            <point key="canvasLocation" x="1214.5038167938931" y="-54.225352112676056"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="OKA-ME-191">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hWU-0y-ik7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="rYm-mS-ccz"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="D7n-Fn-Jc4">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="J7u-AV-e5P"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="578-xk-IoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="289.3129770992366" y="-54.225352112676056"/>
         </scene>
     </scenes>
     <resources>
         <image name="check (1)" width="256" height="256"/>
         <image name="checkbox" width="256" height="256"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
