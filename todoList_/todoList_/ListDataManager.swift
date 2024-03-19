@@ -39,4 +39,8 @@ class ListDataManager {
     func deleteTodoListData(_ row: Int) {
         todoListDataArray.remove(at: row)
     }
+    
+    func insertTodoListData(_ row: Int, _ todoData: TodoData) {
+        todoListDataArray.insert(todoData, at: row)
+    }
 }

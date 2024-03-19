@@ -27,13 +27,17 @@ class ViewController: UIViewController {
     // edit Button이 눌렸을 때 버튼 이름 변경하기 -> 추가모드로 변환
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         if self.tableview.isEditing {
+            // editing 모드 비활성화
             self.editButton.title = "Edit"
             self.tableview.setEditing(false, animated: true)
+            // addButton 비활성화 / 숨기기
             self.addButton.isEnabled = false
             self.addButton.isHidden = true
         } else {
+            // editing 모드 활성화
             self.editButton.title = "Done"
             self.tableview.setEditing(true, animated: true)
+            // addButton 활성화 / 보이기
             self.addButton.isEnabled = true
             self.addButton.isHidden = false
         }
@@ -88,16 +92,26 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // editing 모드의 스타일
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
+    // editing 모드에서의 요소 삭제
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             print("delete")
             self.dataManager.deleteTodoListData(indexPath.row)
             self.tableview.reloadData()
         }
+    }
+    
+    // editing 모드에서의 row 이동구현
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let todolistArray = dataManager.getTodoListData()
+        let targetList: TodoData = todolistArray[sourceIndexPath.row]
+        dataManager.deleteTodoListData(sourceIndexPath.row)
+        dataManager.insertTodoListData(destinationIndexPath.row, targetList)
     }
     
 }
