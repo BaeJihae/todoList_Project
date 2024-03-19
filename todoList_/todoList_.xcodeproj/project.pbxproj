@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EDE68192BA96B0700D05A3E /* ListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE68182BA96B0700D05A3E /* ListDataManager.swift */; };
 		2EE60C732BA8034E00FBC480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE60C722BA8034E00FBC480 /* AppDelegate.swift */; };
 		2EE60C752BA8034E00FBC480 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE60C742BA8034E00FBC480 /* SceneDelegate.swift */; };
 		2EE60C772BA8034E00FBC480 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE60C762BA8034E00FBC480 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EDE68182BA96B0700D05A3E /* ListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataManager.swift; sourceTree = "<group>"; };
 		2EE60C6F2BA8034E00FBC480 /* todoList_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todoList_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE60C722BA8034E00FBC480 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EE60C742BA8034E00FBC480 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				2EE60C862BA809C500FBC480 /* todoData.swift */,
 				2EE60C7D2BA8035000FBC480 /* LaunchScreen.storyboard */,
 				2EE60C802BA8035000FBC480 /* Info.plist */,
+				2EDE68182BA96B0700D05A3E /* ListDataManager.swift */,
 			);
 			path = todoList_;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EE60C772BA8034E00FBC480 /* ViewController.swift in Sources */,
+				2EDE68192BA96B0700D05A3E /* ListDataManager.swift in Sources */,
 				2EE60C872BA809C500FBC480 /* todoData.swift in Sources */,
 				2EE60C732BA8034E00FBC480 /* AppDelegate.swift in Sources */,
 				2EE60C892BA827A700FBC480 /* TodoTableViewCell.swift in Sources */,

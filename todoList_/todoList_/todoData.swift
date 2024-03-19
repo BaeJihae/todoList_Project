@@ -9,10 +9,4 @@ struct TodoData {
     var id: Int?
     var title: String?
     var isChecked: Bool = false
-    
-    init(id: Int? = nil, title: String? = nil, isChecked: Bool) {
-        self.id = id
-        self.title = title
-        self.isChecked = isChecked
-    }
 }

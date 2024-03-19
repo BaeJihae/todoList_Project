@@ -10,45 +10,36 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
-    var tododataArray: [TodoData] = [
-        TodoData(id: 0, title: "안녕하세요", isChecked: false),
-        TodoData(id: 1, title: "오잉?", isChecked: false),
-        TodoData(id: 2, title: "체크박스 확인", isChecked: false),
-        TodoData(id: 3, title: "난 지해", isChecked: false),
-        TodoData(id: 4, title: "안녕하세요", isChecked: false),
-        TodoData(id: 5, title: "오잉?", isChecked: false),
-        TodoData(id: 6, title: "체크박스 확인", isChecked: false),
-        TodoData(id: 7, title: "난 지해", isChecked: false),
-        TodoData(id: 8, title: "안녕하세요", isChecked: false),
-        TodoData(id: 9, title: "오잉?", isChecked: false),
-        TodoData(id: 10, title: "체크박스 확인", isChecked: false),
-        TodoData(id: 11, title: "난 지해", isChecked: false),
-        TodoData(id: 12, title: "안녕하세요", isChecked: false),
-        TodoData(id: 13, title: "오잉?", isChecked: false),
-        TodoData(id: 14, title: "체크박스 확인", isChecked: false),
-        TodoData(id: 15, title: "난 지해", isChecked: false)
-    ]
+    let dataManager = ListDataManager()
 
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var tableview: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataManager.makeListData()
         setting()
-        title = "Todo List"
+        setTitle()
     }
     
+    // edit Button이 눌렸을 때 버튼 이름 변경하기 -> 추가모드로 변환
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         if self.tableview.isEditing {
             self.editButton.title = "Edit"
             self.tableview.setEditing(false, animated: true)
+            self.addButton.isEnabled = false
+            self.addButton.isHidden = true
         } else {
             self.editButton.title = "Done"
             self.tableview.setEditing(true, animated: true)
+            self.addButton.isEnabled = true
+            self.addButton.isHidden = false
         }
     }
     
+    // add Button이 눌렸을 때 얼럿창 띄우기
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add", message: "해야 할 일을 입력해주세요.",
                                       preferredStyle: .alert)
@@ -58,32 +49,55 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
             guard let text = alert.textFields?[0].text else {return}
             if text != "" {
-                self.tododataArray.append(TodoData(title: text, isChecked: false))
+                self.dataManager.updateTodoListData(text)
                 self.tableview.reloadData()
             }
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // 네비게이션 title에 UILabel 추가하기
+    func setTitle() {
+        let nTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        nTitle.textAlignment = .center
+        nTitle.font = UIFont.init(name: "American Typewriter Bold", size: 29.0)
+        nTitle.text = "Todo List"
+        self.navigationItem.titleView = nTitle
+    }
 }
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func setting() {
         tableview.dataSource = self
         tableview.delegate = self
         tableview.rowHeight = 60
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 리턴되는 테이블 뷰 개수
-        return tododataArray.count
+        return dataManager.getTodoListData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableViewCell", for: indexPath) as! TodoTableViewCell
-        
-        cell.todoText.text = tododataArray[indexPath.row].title
+        let todoArray = dataManager.getTodoListData()
+        cell.todoText.text = todoArray[indexPath.row].title
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            print("delete")
+            self.dataManager.deleteTodoListData(indexPath.row)
+            self.tableview.reloadData()
+        }
     }
     
 }
