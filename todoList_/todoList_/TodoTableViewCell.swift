@@ -41,7 +41,6 @@ class TodoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     // (투두) 데이터를 가지고 적절한 UI 표시하기

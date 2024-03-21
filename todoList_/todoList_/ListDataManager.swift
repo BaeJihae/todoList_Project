@@ -138,6 +138,31 @@ class ListDataManager {
     }
     
     
+    // 데이터 title 수정 구현하기
+    func updateTodoListData(_ todoTitle: String, _ todoDataId: TodoData) {
+        
+        // 수정할 title 내용
+        let modifiedTitle = todoTitle
+        
+        guard let modifiedManagedObject = fetchManagedObject(todoDataId) else {
+            print("Failed to fetch managed objects.")
+            return
+        }
+        
+        modifiedManagedObject.setValue(modifiedTitle, forKey: "title")
+        
+        // 변경 사항 저장
+        do {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            try appDelegate.persistentContainer.viewContext.save()
+            print("Changes saved successfully.")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    
     // 데이터 우선순위 업데이트
     func updatePriorityCoreData(moveRowAt firstDataId: TodoData, to secondDataId: TodoData) {
 
