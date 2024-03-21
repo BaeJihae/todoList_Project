@@ -25,12 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setting()
         setTitle()
-        // 셀 버튼 클릭 이벤트에 대한 클로저 처리
-        cellButtonAction = { indexPath in
-            // 선택된 셀에 대한 작업 수행
-            let tododataList = self.dataManager.getTodoListCoreData()[indexPath.row]
-            self.dataManager.updateCheckedCoreData(moveRowAt: tododataList)
-        }
+        buttonAction()
     }
     
     // 화면에 다시 진입할때마다 다시 테이블뷰 그리기 (업데이트 등 제대로 표시)
@@ -54,6 +49,14 @@ class ViewController: UIViewController {
         nTitle.font = UIFont.init(name: "American Typewriter Bold", size: 29.0)
         nTitle.text = "Todo List"
         self.navigationItem.titleView = nTitle
+    }
+    
+    func buttonAction() {
+        cellButtonAction = { indexPath in
+            // 선택된 셀에 대한 작업 수행
+            let tododataList = self.dataManager.getTodoListCoreData()[indexPath.row]
+            self.dataManager.updateCheckedCoreData(moveRowAt: tododataList)
+        }
     }
     
     // edit Button이 눌렸을 때 버튼 이름 변경하기 -> 추가모드로 변환
@@ -128,6 +131,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         // dataManager를 통한 코어데이터 받아오기
         let toDoData = dataManager.getTodoListCoreData()
+        print(toDoData)
         cell.toDoData = toDoData[indexPath.row]
         
         // 셀에 클로저 할당

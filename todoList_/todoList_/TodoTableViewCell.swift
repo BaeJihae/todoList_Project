@@ -25,6 +25,7 @@ extension String {
 class TodoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var todoText: UILabel!
+    @IBOutlet weak var checkButton: UIButton!
     
     // 모델
     let dataManager = ListDataManager.shared
@@ -46,10 +47,12 @@ class TodoTableViewCell: UITableViewCell {
     // (투두) 데이터를 가지고 적절한 UI 표시하기
     func configureUIwithData() {
         todoText.text = toDoData?.title
+        checkButton.isSelected = ((toDoData?.isChecked) ?? true )
     }
     
     // 체크 버튼 변경하기
     @IBAction func checkButtonTapped(_ sender: UIButton) {
+        buttonAction?()
         if sender.isSelected {
             sender.isSelected = false
             todoText.textColor = UIColor.black
@@ -61,11 +64,7 @@ class TodoTableViewCell: UITableViewCell {
             todoText.font = UIFont.systemFont(ofSize:18)
             todoText.attributedText = todoText.text?.strikeThrough()
         }
-        buttonAction?()
     }
-    
-    
-
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -75,6 +75,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkButton" destination="g0D-LF-ubR" id="KXk-VY-QD2"/>
                                             <outlet property="todoText" destination="ArF-u3-bfU" id="Rqy-PK-yZC"/>
                                         </connections>
                                     </tableViewCell>
