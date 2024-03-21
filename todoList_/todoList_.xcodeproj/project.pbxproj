@@ -69,13 +69,13 @@
 		2EE60C712BA8034E00FBC480 /* todoList_ */ = {
 			isa = PBXGroup;
 			children = (
+				2EE60C782BA8034E00FBC480 /* Main.storyboard */,
+				2EE60C7D2BA8035000FBC480 /* LaunchScreen.storyboard */,
 				2EE60C722BA8034E00FBC480 /* AppDelegate.swift */,
 				2EE60C742BA8034E00FBC480 /* SceneDelegate.swift */,
 				2EDE68182BA96B0700D05A3E /* ListDataManager.swift */,
 				2EE60C762BA8034E00FBC480 /* ViewController.swift */,
 				2EE60C882BA827A600FBC480 /* TodoTableViewCell.swift */,
-				2EE60C782BA8034E00FBC480 /* Main.storyboard */,
-				2EE60C7D2BA8035000FBC480 /* LaunchScreen.storyboard */,
 				2EE60C7B2BA8035000FBC480 /* Assets.xcassets */,
 				2EE60C802BA8035000FBC480 /* Info.plist */,
 				2E01B1AA2BAACB2C00D07F8E /* todoDataModel.xcdatamodeld */,

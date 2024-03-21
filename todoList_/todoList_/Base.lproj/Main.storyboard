@@ -32,6 +32,9 @@
                                         <buttonConfiguration key="configuration" style="plain">
                                             <imageReference key="image" image="lessthan" catalog="system" symbolScale="large"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="79n-58-e2f"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24.03.18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgK-wQ-neZ">
                                         <rect key="frame" x="85" y="0.0" width="224" height="30"/>
@@ -53,6 +56,9 @@
                                         <buttonConfiguration key="configuration" style="plain">
                                             <imageReference key="image" image="greaterthan" catalog="system" symbolScale="large"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="frontButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljj-RM-smZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -203,6 +209,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ZVW-xG-pMZ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RBV-nA-VEp">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
