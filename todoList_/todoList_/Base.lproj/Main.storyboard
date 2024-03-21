@@ -51,7 +51,7 @@
                                                         <action selector="checkButtonTapped:" destination="0we-Ib-ENV" eventType="touchUpInside" id="zf5-Bj-w4I"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-u3-bfU" userLabel="Todo Text">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="TodoTableViewCell" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-u3-bfU" userLabel="Todo Text">
                                                     <rect key="frame" x="50" y="5" width="323" height="35"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <attributedString key="attributedText">
@@ -115,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1214.5038167938931" y="-54.225352112676056"/>
+            <point key="canvasLocation" x="1210" y="-54"/>
         </scene>
         <!--Item-->
         <scene sceneID="OKA-ME-191">
@@ -129,7 +129,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="J7u-AV-e5P"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="SYU-4D-Qm6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="578-xk-IoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

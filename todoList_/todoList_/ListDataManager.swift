@@ -6,41 +6,188 @@
 //
 
 import UIKit
+import CoreData
 
 class ListDataManager {
-    private var todoListDataArray: [TodoData] = []
     
-    func makeListData() {
-        todoListDataArray = [
-            TodoData(id: 0, title: "오이사기", isChecked: false),
-            TodoData(id: 1, title: "헤드셋고치기", isChecked: false),
-            TodoData(id: 2, title: "책사기", isChecked: false),
-            TodoData(id: 3, title: "영양제 먹기", isChecked: false),
-            TodoData(id: 4, title: "병원 방문", isChecked: false),
-            TodoData(id: 5, title: "물 2L 마시기", isChecked: false),
-            TodoData(id: 6, title: "강아지 산책 시키기", isChecked: false),
-            TodoData(id: 7, title: "자기소개 하기", isChecked: false),
-            TodoData(id: 8, title: "iOS 강의듣기", isChecked: false),
-            TodoData(id: 9, title: "TIL 작성하기", isChecked: false),
-            TodoData(id: 10, title: "알고리즘 문제 풀기", isChecked: false),
-            TodoData(id: 11, title: "열공하기", isChecked: false),
-        ]
-    }
     
-    func getTodoListData() -> [TodoData] {
+    // 데이터 매니저
+    static let shared = ListDataManager()
+    private init() {}
+    
+    // 앱 델리게이트
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    
+    
+    // 임시저장소
+    lazy var context = appDelegate?.persistentContainer.viewContext
+    
+    
+    // 엔터티 이름 (코어 데이터에 저장된 객체)
+    let modelName: String = "TodoData"
+    
+    // Date 인스턴스
+    let now = Date()
+    let formatter = DateFormatter()
+    
+    
+    // priority 저장
+    static var priority = 0
+    
+    
+    
+    // 데이터 가져오기
+    func getTodoListCoreData() -> [TodoData] {
+        
+        // 데이터를 저장할 배열
+        var todoListDataArray: [TodoData] = []
+        
+        // 임시 저장소 있는지 확인
+        if let context = context {
+            
+            // 요청서
+            let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+            // 정렬 순서를 정해서 요청서에 넘겨주기
+            request.sortDescriptors = [NSSortDescriptor(key: "priority", ascending: true)]
+            
+            do {
+                // 임시 저장소에서 요청서를 통해 데이터 가져오기 (fetch)
+                if let fetchedTodoList = try context.fetch(request) as? [TodoData] {
+                    todoListDataArray = fetchedTodoList
+                }
+            } catch {
+                print("데이터를 가져오는 과정에서 에러가 발생하였습니다.")
+            }
+        }
         return todoListDataArray
     }
     
-    func updateTodoListData(_ title: String) {
-        let todo = TodoData(id: todoListDataArray.count + 1, title: title, isChecked: false)
-        todoListDataArray.append(todo)
+    
+    
+    // 데이터 저장하기
+    func saveTodoListData(todoTitle: String?, completion: @escaping () -> Void){
+        if let context = context {
+            if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
+                if let todoData = NSManagedObject(entity: entity, insertInto: context) as? TodoData {
+                    // 새로운 데이터의 요소
+                    todoData.title = todoTitle
+                    todoData.id = UUID()
+                    todoData.isChecked = false
+                    todoData.date = Date()
+                    todoData.priority = Int64(ListDataManager.priority)
+                    // 생성된 데이터의 개수 증가 ( 정렬 )
+                    ListDataManager.priority += 1
+                    appDelegate?.saveContext()
+                }
+            }
+        }
+        completion()
     }
     
-    func deleteTodoListData(_ row: Int) {
-        todoListDataArray.remove(at: row)
+    
+    
+    // 데이터 삭제하기
+    func deleteTodoListData(data: TodoData, completion: @escaping () -> Void) {
+        guard let listDataId = data.id else {
+            print("id를 불러오는 과정에서 오류가 발생하였습니다.")
+            return
+        }
+        
+        if let context = context {
+            let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+            request.predicate = NSPredicate(format: "id = %@", listDataId as CVarArg)
+            do {
+                if let fetchedTodoList = try context.fetch(request) as? [TodoData] {
+                    if let targetTodo = fetchedTodoList.first {
+                        context.delete(targetTodo)
+                        appDelegate?.saveContext()
+                    }
+                }
+                completion()
+            }catch let error as NSError {
+                print("데이터를 삭제하는 과정에서 에러가 발생하였습니다. \(error), \(error.userInfo)")
+                completion()
+            }
+        }
     }
     
-    func insertTodoListData(_ row: Int, _ todoData: TodoData) {
-        todoListDataArray.insert(todoData, at: row)
+    
+    // 해당 Data를 반환하는 메서드
+    func fetchManagedObject(_ withId: TodoData) -> NSManagedObject? {
+        
+        guard let listDataId = withId.id else {
+            print("id를 불러오는 과정에서 오류가 발생하였습니다.")
+            return nil
+        }
+        
+        // 임시저장소 있는지 확인
+        if let context = context {
+            // 요청서
+            let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+            // id에 맞는 데이터 요청
+            request.predicate = NSPredicate(format: "id = %@", listDataId as CVarArg)
+            do {
+                let result = try context.fetch(request)
+                return result.first
+            } catch let error as NSError {
+                print("fetch되지 않았습니다. \(error), \(error.userInfo)")
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    
+    // 데이터 우선순위 업데이트
+    func updatePriorityCoreData(moveRowAt firstDataId: TodoData, to secondDataId: TodoData) {
+
+        // 각 데이터의 변경할 내용
+        let firstDataNewValue = secondDataId.priority
+        let secondDataNewValue = firstDataId.priority
+
+        // 변경할 데이터 가져오기
+        guard let firstManagedObject = fetchManagedObject(firstDataId) ,
+              let secondManagedObject = fetchManagedObject(secondDataId) else {
+            print("Failed to fetch managed objects.")
+            return
+        }
+
+        // 가져온 데이터의 속성 업데이트
+        firstManagedObject.setValue(firstDataNewValue, forKey: "priority")
+        secondManagedObject.setValue(secondDataNewValue, forKey: "priority")
+
+        // 변경 사항 저장
+        do {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            try appDelegate.persistentContainer.viewContext.save()
+            print("Changes saved successfully.")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    // 데이터 checked 업데이트
+    func updateCheckedCoreData(moveRowAt todoDataId: TodoData) {
+
+        // 각 데이터의 변경할 내용
+        let ischecked = !todoDataId.isChecked
+
+        // 변경할 데이터 가져오기
+        guard let todoManagedObject = fetchManagedObject(todoDataId) else {
+            print("Failed to fetch managed objects.")
+            return
+        }
+
+        // 가져온 데이터의 속성 업데이트
+        todoManagedObject.setValue(ischecked, forKey: "isChecked")
+
+        // 변경 사항 저장
+        do {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            try appDelegate.persistentContainer.viewContext.save()
+            print("Changes saved successfully.")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 }
