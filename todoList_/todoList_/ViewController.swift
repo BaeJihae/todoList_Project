@@ -56,9 +56,9 @@ class ViewController: UIViewController {
     
     // 네비게이션 title에 UILabel 추가하기
     func setTitle() {
-        let todoTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 45))
+        let todoTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
         todoTitle.textAlignment = .center
-        todoTitle.font = UIFont.init(name: "American Typewriter Bold", size: 30.0)
+        todoTitle.font = UIFont.init(name: "American Typewriter", size: 25.0)
         todoTitle.text = "TodoList"
         self.navigationItem.titleView = todoTitle
     }

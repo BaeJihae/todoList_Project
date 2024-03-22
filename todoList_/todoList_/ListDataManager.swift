@@ -61,7 +61,7 @@ class ListDataManager {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.modelName)
             
             // 날짜별로 정렬하기 위한 속성 추가
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "priority", ascending: true)]
             
             do {
                 // 데이터 가져오기
