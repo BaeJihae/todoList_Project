@@ -2,7 +2,7 @@
 //  TodoData+CoreDataProperties.swift
 //  todoList_
 //
-//  Created by 배지해 on 3/21/24.
+//  Created by 배지해 on 3/25/24.
 //
 //
 
@@ -21,6 +21,7 @@ extension TodoData {
     @NSManaged public var isChecked: Bool
     @NSManaged public var priority: Int64
     @NSManaged public var title: String?
+    @NSManaged public var color: Int16
 
 }
 

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todo-->
+        <!--  TodoList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="todoList_" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,8 +64,12 @@
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h3J-Wx-g5X">
                                 <rect key="frame" x="10" y="195" width="394" height="618"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" name="AccentColor"/>
+                                <color key="separatorColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoTableViewCell" id="0we-Ib-ENV" customClass="TodoTableViewCell" customModule="todoList_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="394" height="44.666667938232422"/>
@@ -105,6 +109,7 @@
                                                 <constraint firstItem="ArF-u3-bfU" firstAttribute="height" secondItem="g0D-LF-ubR" secondAttribute="height" id="lZN-d3-Lw2"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="checkButton" destination="g0D-LF-ubR" id="KXk-VY-QD2"/>
                                             <outlet property="todoText" destination="ArF-u3-bfU" id="Rqy-PK-yZC"/>
@@ -114,7 +119,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fkf-ab-2zl"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="h3J-Wx-g5X" firstAttribute="leading" secondItem="Fkf-ab-2zl" secondAttribute="leading" constant="10" id="EAt-yJ-Iwa"/>
                             <constraint firstItem="Fkf-ab-2zl" firstAttribute="bottom" secondItem="h3J-Wx-g5X" secondAttribute="bottom" id="Jh4-fK-pcG"/>
@@ -127,18 +132,21 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Todo" image="list.bullet" catalog="system" id="aAs-rc-ZWP"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Syr-Dq-L7J">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" hidden="YES" id="hxb-CC-Kmh">
-                            <connections>
-                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="e8T-Ke-P47"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" style="done" id="RrL-P6-O5Z">
-                            <color key="tintColor" systemColor="systemBlueColor"/>
-                            <connections>
-                                <action selector="editButtonTapped:" destination="BYZ-38-t0r" id="Ovt-jW-uua"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="  TodoList" largeTitleDisplayMode="always" id="Syr-Dq-L7J">
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="add" id="hxb-CC-Kmh">
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="e8T-Ke-P47"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" style="done" id="RrL-P6-O5Z">
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="BYZ-38-t0r" id="Ovt-jW-uua"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -218,24 +226,32 @@
                                                     <constraint firstItem="46j-pa-bfa" firstAttribute="width" secondItem="81n-ee-V4N" secondAttribute="width" multiplier="60%" priority="900" id="wvF-LG-cgV"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8QB-m8-OFS" userLabel="Category Stack View">
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8QB-m8-OFS" userLabel="Category Stack View">
                                                 <rect key="frame" x="10" y="228.66666666666663" width="374" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎨 Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jq-fY-Ntw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="224.33333333333334" height="80"/>
+                                                        <rect key="frame" x="0.0" y="30.333333333333371" width="112.33333333333334" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <pickerView clipsSubviews="YES" tag="9" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="t36-F2-Muv">
-                                                        <rect key="frame" x="234.33333333333337" y="0.0" width="139.66666666666663" height="80"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghu-9a-3Fd">
+                                                        <rect key="frame" x="122.33333333333334" y="20" width="3" height="40"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="80" id="QaY-OE-5ba"/>
+                                                            <constraint firstAttribute="height" constant="40" id="Jj3-yl-Z8D"/>
+                                                            <constraint firstAttribute="width" constant="3" id="Mkd-Sc-LyD"/>
                                                         </constraints>
+                                                    </view>
+                                                    <pickerView clipsSubviews="YES" tag="9" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="t36-F2-Muv">
+                                                        <rect key="frame" x="135.33333333333337" y="0.0" width="238.66666666666663" height="80"/>
                                                     </pickerView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="9jq-fY-Ntw" firstAttribute="width" secondItem="8QB-m8-OFS" secondAttribute="width" multiplier="60%" priority="900" id="gMD-9p-4wb"/>
+                                                    <constraint firstItem="ghu-9a-3Fd" firstAttribute="top" secondItem="8QB-m8-OFS" secondAttribute="top" constant="20" id="596-iH-AwI"/>
+                                                    <constraint firstAttribute="height" constant="80" id="Hz5-lh-0ot"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ghu-9a-3Fd" secondAttribute="bottom" constant="20" id="NuG-dR-3Wa"/>
+                                                    <constraint firstItem="9jq-fY-Ntw" firstAttribute="width" secondItem="8QB-m8-OFS" secondAttribute="width" multiplier="30%" priority="900" id="gMD-9p-4wb"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="fpA-Pu-j1u" userLabel="Button Stack View">
@@ -307,16 +323,18 @@
                     <connections>
                         <outlet property="backgroundView" destination="bbq-Fw-mJT" id="WZq-BS-URn"/>
                         <outlet property="cancelButton" destination="NV9-bj-8wI" id="35p-cg-ivM"/>
+                        <outlet property="colorView" destination="ghu-9a-3Fd" id="e7Z-WQ-Lh5"/>
                         <outlet property="datePickerView" destination="hli-Ip-Bbm" id="vIE-AN-d6B"/>
                         <outlet property="descriptionLabel" destination="4vv-U2-6x8" id="FpA-gB-6fB"/>
                         <outlet property="doneButton" destination="QMi-ba-UvR" id="HiR-u7-HTF"/>
                         <outlet property="mainLabel" destination="ULZ-VB-tje" id="xYN-fN-3lr"/>
+                        <outlet property="pickerView" destination="t36-F2-Muv" id="UaH-t7-KwW"/>
                         <outlet property="titleTextField" destination="FKO-AA-zrh" id="ugq-MP-Hpl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LrB-rw-TTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="-346"/>
+            <point key="canvasLocation" x="3603" y="-346"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="GOb-OW-JYD">
@@ -340,9 +358,21 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hWU-0y-ik7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="rYm-mS-ccz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="D7n-Fn-Jc4">
+                    <navigationBar key="navigationBar" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" largeTitles="YES" id="D7n-Fn-Jc4">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="1"/>
+                            <color key="textShadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="28"/>
+                            <color key="textColor" red="0.1176470518" green="0.1176470518" blue="0.1176470518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="textShadowColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <offsetWrapper key="textShadowOffset" horizontal="2" vertical="2"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

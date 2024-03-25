@@ -10,6 +10,7 @@
 		2E01B1AC2BAACB2C00D07F8E /* todoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E01B1AA2BAACB2C00D07F8E /* todoDataModel.xcdatamodeld */; };
 		2E0E2AAF2BAC9292000DB1C7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0E2AAE2BAC9292000DB1C7 /* CalendarViewController.swift */; };
 		2E924CC52BAD2B25000D06E3 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E924CC42BAD2B25000D06E3 /* AddDataViewController.swift */; };
+		2EBEBA7A2BB13DBA00F9B355 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBEBA792BB13DBA00F9B355 /* Color.swift */; };
 		2EDE68192BA96B0700D05A3E /* ListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE68182BA96B0700D05A3E /* ListDataManager.swift */; };
 		2EE60C732BA8034E00FBC480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE60C722BA8034E00FBC480 /* AppDelegate.swift */; };
 		2EE60C752BA8034E00FBC480 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE60C742BA8034E00FBC480 /* SceneDelegate.swift */; };
@@ -26,6 +27,7 @@
 		2E01B1AB2BAACB2C00D07F8E /* todoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = todoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		2E0E2AAE2BAC9292000DB1C7 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		2E924CC42BAD2B25000D06E3 /* AddDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
+		2EBEBA792BB13DBA00F9B355 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2EDE68182BA96B0700D05A3E /* ListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataManager.swift; sourceTree = "<group>"; };
 		2EE60C6F2BA8034E00FBC480 /* todoList_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todoList_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE60C722BA8034E00FBC480 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,8 +57,6 @@
 		2EE60C662BA8034E00FBC480 = {
 			isa = PBXGroup;
 			children = (
-				2EFFBC3C2BABE1D2001116AC /* TodoData+CoreDataClass.swift */,
-				2EFFBC3D2BABE1D2001116AC /* TodoData+CoreDataProperties.swift */,
 				2EE60C712BA8034E00FBC480 /* todoList_ */,
 				2EE60C702BA8034E00FBC480 /* Products */,
 			);
@@ -73,6 +73,8 @@
 		2EE60C712BA8034E00FBC480 /* todoList_ */ = {
 			isa = PBXGroup;
 			children = (
+				2EFFBC3D2BABE1D2001116AC /* TodoData+CoreDataProperties.swift */,
+				2EFFBC3C2BABE1D2001116AC /* TodoData+CoreDataClass.swift */,
 				2EE60C782BA8034E00FBC480 /* Main.storyboard */,
 				2EE60C7D2BA8035000FBC480 /* LaunchScreen.storyboard */,
 				2EE60C722BA8034E00FBC480 /* AppDelegate.swift */,
@@ -82,6 +84,7 @@
 				2E924CC42BAD2B25000D06E3 /* AddDataViewController.swift */,
 				2E0E2AAE2BAC9292000DB1C7 /* CalendarViewController.swift */,
 				2EE60C882BA827A600FBC480 /* TodoTableViewCell.swift */,
+				2EBEBA792BB13DBA00F9B355 /* Color.swift */,
 				2EE60C7B2BA8035000FBC480 /* Assets.xcassets */,
 				2EE60C802BA8035000FBC480 /* Info.plist */,
 				2E01B1AA2BAACB2C00D07F8E /* todoDataModel.xcdatamodeld */,
@@ -162,6 +165,7 @@
 			files = (
 				2E01B1AC2BAACB2C00D07F8E /* todoDataModel.xcdatamodeld in Sources */,
 				2EE60C772BA8034E00FBC480 /* ViewController.swift in Sources */,
+				2EBEBA7A2BB13DBA00F9B355 /* Color.swift in Sources */,
 				2EDE68192BA96B0700D05A3E /* ListDataManager.swift in Sources */,
 				2EFFBC3E2BABE1D3001116AC /* TodoData+CoreDataClass.swift in Sources */,
 				2E924CC52BAD2B25000D06E3 /* AddDataViewController.swift in Sources */,

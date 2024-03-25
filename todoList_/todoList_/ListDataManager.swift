@@ -88,7 +88,7 @@ class ListDataManager {
     
     
     // MARK: - (save) 새로운 데이터 저장
-    func saveTodoListData(todoTitle: String, todoDate: Date, completion: @escaping () -> Void) {
+    func saveTodoListData(todoTitle: String, todoDate: Date, todoColor: Int16, completion: @escaping () -> Void) {
         if let context = context {
             // 저장된 데이터 중 가장 큰 priority 값을 가져오는 쿼리
             let fetchRequest: NSFetchRequest<TodoData> = TodoData.fetchRequest()
@@ -107,7 +107,8 @@ class ListDataManager {
                             todoData.id = UUID()
                             todoData.isChecked = false
                             todoData.date = todoDate
-                            todoData.priority = newPriority // 새로운 데이터의 priority 설정
+                            todoData.priority = newPriority
+                            todoData.color = todoColor
                             
                             // 생성된 데이터의 개수 증가 ( 정렬 )
                             appDelegate?.saveContext()
@@ -200,13 +201,14 @@ class ListDataManager {
     }
     
     
-   // MARK: - (Update) 제목, 날짜 수정
+   // MARK: - (Update) 제목, 날짜, 카테고리 수정
     
-    func updateTodoListData(todoTitle: String, todoDate: Date, todoDataId: TodoData, completion: @escaping () -> Void) {
+    func updateTodoListData(todoTitle: String, todoDate: Date, todoColor: Int16, todoDataId: TodoData, completion: @escaping () -> Void) {
         
         // 수정할 title 내용
         let modifiedTitle = todoTitle
         let modifiedDate = todoDate
+        let modifiedColor = todoColor
         
         guard let modifiedManagedObject = fetchManagedObject(todoDataId) else {
             print("Failed to fetch managed objects.")
@@ -215,6 +217,7 @@ class ListDataManager {
         
         modifiedManagedObject.setValue(modifiedTitle, forKey: "title")
         modifiedManagedObject.setValue(modifiedDate, forKey: "date")
+        modifiedManagedObject.setValue(modifiedColor, forKey: "color")
         
         // 변경 사항 저장
         do {

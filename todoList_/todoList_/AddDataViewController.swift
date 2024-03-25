@@ -7,8 +7,7 @@
 
 import UIKit
 
-class AddDataViewController: UIViewController {
-
+class AddDataViewController: UIViewController{
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
@@ -16,6 +15,8 @@ class AddDataViewController: UIViewController {
     @IBOutlet weak var datePickerView: UIDatePicker!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var pickerView: UIPickerView!
     
     // Closure 타입 정의
     typealias CompletionHandler = () -> Void
@@ -24,7 +25,10 @@ class AddDataViewController: UIViewController {
 
     let dataManager = ListDataManager.shared
     var todoData: TodoData?
+    var selectedColor: Color = .coralPink
     
+    // 피커뷰에 들어갈 색상
+    let colors: [Color] = [.coralPink, .oldCountry, .hibiscus, .calamine, .watery, .breezy, .oceanAir, .polarWhite, .teresaGreen, .bathSalts, .wytheBlue, .seaFoam]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +37,11 @@ class AddDataViewController: UIViewController {
         if todoData != nil {
             setReviseView()
         }
+        setPickerView()
     }
     
     func setUI() {
-        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+        
         // 텍스트 필드의 키보드 스타일 변경
         titleTextField.keyboardType = UIKeyboardType.default
         // 텍스트 필드의 가이드 역할
@@ -60,16 +65,16 @@ class AddDataViewController: UIViewController {
     
     func setBackgroundView() {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.layer.cornerRadius = 15 // 뷰의 모서리 둥글기 설정
-        backgroundView.layer.shadowColor = UIColor.black.cgColor // 그림자 색상
-        backgroundView.layer.shadowOpacity = 0.4 // 그림자 투명도
-        backgroundView.layer.shadowOffset = CGSize(width: 0, height: 2) // 그림자의 위치
-        backgroundView.layer.shadowRadius = 6 // 그림자의 반경
+        backgroundView.layer.cornerRadius = 15                              // 뷰의 모서리 둥글기 설정
+        backgroundView.layer.shadowColor = UIColor.black.cgColor            // 그림자 색상
+        backgroundView.layer.shadowOpacity = 0.4                            // 그림자 투명도
+        backgroundView.layer.shadowOffset = CGSize(width: 0, height: 2)     // 그림자의 위치
+        backgroundView.layer.shadowRadius = 6                               // 그림자의 반경
     }
     
+    
     func setReviseView() {
-        print(#function)
-        mainLabel.text = "Edit Todo"
+        mainLabel.text = "Edit To Do"
         titleTextField.text = todoData?.title
         datePickerView.date = todoData?.date ?? Date()
     }
@@ -84,29 +89,80 @@ class AddDataViewController: UIViewController {
         
         guard let text = titleTextField.text else { return }
         let date = datePickerView.date
+        let color = selectedColor
         
-        if text != "" {
+        if text == "" {
+            
+            // 텍스트가 입력되지 않았을 때 경고 얼럿창 보여주기
+            let alert = UIAlertController(title: "Error", message: "todo title이 입력되지 않았습니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default)
+            
+            alert.addAction(ok)
+
+            present(alert, animated: true)
+        }else {
             if todoData != nil {
                 if let todoData = todoData {
-                    dataManager.updateTodoListData(todoTitle: text, todoDate: date, todoDataId: todoData) {
+                    dataManager.updateTodoListData(todoTitle: text, todoDate: date, todoColor: Int16(color.rawValue),todoDataId: todoData) {
                         print("데이터 업데이트 완료")
                         self.saveData()
                     }
                 }
             }else{
-                dataManager.saveTodoListData(todoTitle: text, todoDate: date) {
+                dataManager.saveTodoListData(todoTitle: text, todoDate: date, todoColor: Int16(color.rawValue)) {
                     print("새로운 데이터 저장 완료")
                     self.saveData()
                 }
             }
+            dismiss(animated: true, completion: nil)
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     // 데이터 저장이 완료된 후 호출되는 메서드
     func saveData() {
         // 데이터 저장 완료를 알리는 알림 발송
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DataSaved"), object: nil)
+    }
+}
+extension AddDataViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func setPickerView() {
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.selectRow(0, inComponent: 0, animated: false)
+        colorView.backgroundColor = selectedColor.backgoundColor
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return colors.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        // 커스텀 뷰 생성
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: pickerView.bounds.width, height: 40))
+        
+        // 동그란 색상 뷰 생성
+        let colorView = UIView(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
+        colorView.backgroundColor = colors[row].backgoundColor
+        colorView.layer.cornerRadius = 10
+        customView.addSubview(colorView)
+        
+        // 텍스트 레이블 생성
+        let label = UILabel(frame: CGRect(x: 40, y: 0, width: pickerView.bounds.width - 50, height: 40))
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.text = colors[row].description
+        customView.addSubview(label)
+        
+        return customView
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedColor = colors[row]
+        colorView.backgroundColor = selectedColor.backgoundColor
     }
 }

@@ -13,9 +13,7 @@ class TodoTableViewCell: UITableViewCell {
     @IBOutlet weak var checkButton: UIButton!
     
     let dataManager = ListDataManager.shared
-    
     var buttonAction: (() -> Void)?
-    
     
     // ToDoData를 전달받을 변수
     var toDoData: TodoData? {
@@ -24,13 +22,33 @@ class TodoTableViewCell: UITableViewCell {
         }
     }
     
-    
     // TodoData로 UI 표시
     func configureUIwithData() {
         todoText.text = toDoData?.title
         setTableViewCell()
     }
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setView()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Cell 간격 조정
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6))
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func setView() {
+        // Cell 둥근 모서리 적용(값이 커질수록 완만)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.layer.cornerRadius = 30
+        contentView.backgroundColor = UIColor(red: 217, green: 221, blue: 217, alpha: 0)
+    }
     
     func setTableViewCell() {
         if let ischecked = toDoData?.isChecked {
@@ -76,7 +94,6 @@ class TodoTableViewCell: UITableViewCell {
     }
 
 }
-
 
 // MARK: - strike 함수
 

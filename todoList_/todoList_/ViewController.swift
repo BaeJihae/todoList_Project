@@ -34,7 +34,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setting()
-        setTitle()
         buttonAction()
         setDate()
         NotificationCenter.default.addObserver(self, selector: #selector(dataSaved), name: NSNotification.Name(rawValue: "DataSaved"), object: nil)
@@ -64,7 +63,7 @@ class ViewController: UIViewController {
     // 네비게이션 title에 UILabel 추가하기
     func setTitle() {
         let todoTitle = UILabel(frame: CGRect(x: 0, y: -30, width: 200, height: 60))
-        todoTitle.textAlignment = .center
+        todoTitle.textAlignment = .left
         todoTitle.font = UIFont.init(name: "Charter Bold", size: 25.0)
         todoTitle.text = "TodoList"
         self.navigationItem.titleView = todoTitle
@@ -117,19 +116,11 @@ class ViewController: UIViewController {
             self.editButton.title = "Edit"
             self.tableview.setEditing(false, animated: true)
             
-            // addButton 비활성화 / 숨기기
-            self.addButton.isEnabled = false
-            self.addButton.isHidden = true
-            
         } else {
             
             // editing 모드 활성화
             self.editButton.title = "Done"
             self.tableview.setEditing(true, animated: true)
-            
-            // addButton 활성화 / 보이기
-            self.addButton.isEnabled = true
-            self.addButton.isHidden = false
             
         }
     }
@@ -279,56 +270,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    // MARK: - Revise 구현
-    
-//    // 기본 모드에서 왼쪽으로 슬라이스
-//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        
-//        // UIContextualAction
-//        let revise = UIContextualAction(style: .normal, title: "revise") { (action, view, completion: @escaping (Bool) -> Void ) in
-//            
-//            // 편집 동작 구현
-//            let alert = UIAlertController(title: "수정",
-//                                          message: "to do를 수정해 주세요.",
-//                                          preferredStyle: .alert)
-//            
-//            alert.addTextField{ $0.placeholder = "to do" }
-//            
-//            // 얼럿 창의 확인 버튼
-//            alert.addAction(UIAlertAction(title: "확인",
-//                                          style: .default,
-//                                          handler: { _ in
-//                
-//                let modifiedtodoData = self.dataManager.getTodoListCoreData(self.pagedate)[indexPath.row]
-//                guard let text = alert.textFields?[0].text else {return}
-//                if text != "" {
-//                    
-//                    // cell의 title 수정
-//                    self.dataManager.updateTodoListData(text, modifiedtodoData)
-//                    
-//                    self.tableview.reloadData()
-//                }
-//            }))
-//            
-//            // 얼럿 창의 최소 버튼
-//            alert.addAction(UIAlertAction(title: "취소",
-//                                          style: .cancel,
-//                                          handler: nil))
-//            
-//            self.present(alert, animated: true, completion: nil)
-//
-//            
-//            
-//            print("edit 클릭 됨")
-//            completion(true)
-//        }
-//        
-//        // 이미지 / 백그라운드 설정
-//        revise.image = UIImage(systemName: "pencil")
-//        revise.backgroundColor = .systemGreen
-//        
-//        return UISwipeActionsConfiguration(actions: [revise])
-//    }
 }
 
 
