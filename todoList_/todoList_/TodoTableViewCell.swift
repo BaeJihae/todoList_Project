@@ -28,7 +28,22 @@ class TodoTableViewCell: UITableViewCell {
     // TodoData로 UI 표시
     func configureUIwithData() {
         todoText.text = toDoData?.title
-        checkButton.isSelected = ((toDoData?.isChecked) ?? true )
+        setTableViewCell()
+    }
+    
+    
+    func setTableViewCell() {
+        if let ischecked = toDoData?.isChecked {
+            if ischecked == true {
+                checkButton.isSelected = true
+                todoText.textColor = UIColor.darkGray
+                todoText.attributedText = todoText.text?.strikeThrough()
+            }else {
+                checkButton.isSelected = false
+                todoText.textColor = UIColor.black
+                todoText.attributedText = todoText.text?.removeStrikeThrough()
+            }
+        }
     }
     
     

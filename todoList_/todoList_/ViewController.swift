@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     // 셀에 버튼 클릭 이벤트에 대한 클로저 정의
     var cellButtonAction: ((IndexPath) -> Void)?
     
+    var tododataSegue: TodoData? = nil
     
     // MARK: - UI관련
     
@@ -36,8 +37,14 @@ class ViewController: UIViewController {
         setTitle()
         buttonAction()
         setDate()
+        NotificationCenter.default.addObserver(self, selector: #selector(dataSaved), name: NSNotification.Name(rawValue: "DataSaved"), object: nil)
     }
-    
+
+    // 데이터 저장 완료 알림을 받았을 때 호출되는 메서드
+    @objc func dataSaved() {
+        // UITableView 다시 그리기
+        tableview.reloadData()
+    }
 
     // 화면을 전환할 때마다 다시 테이블뷰 그리기
     override func viewWillAppear(_ animated: Bool) {
@@ -56,13 +63,12 @@ class ViewController: UIViewController {
     
     // 네비게이션 title에 UILabel 추가하기
     func setTitle() {
-        let todoTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
+        let todoTitle = UILabel(frame: CGRect(x: 0, y: -30, width: 200, height: 60))
         todoTitle.textAlignment = .center
-        todoTitle.font = UIFont.init(name: "American Typewriter", size: 25.0)
+        todoTitle.font = UIFont.init(name: "Charter Bold", size: 25.0)
         todoTitle.text = "TodoList"
         self.navigationItem.titleView = todoTitle
     }
-    
     
     // MARK: - cell로 indexPath 값 주기
     
@@ -134,31 +140,15 @@ class ViewController: UIViewController {
     // add Button이 눌렸을 때 얼럿창 띄우기
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         
-        let alert = UIAlertController(title: "Add",
-                                      message: "해야 할 일을 입력해주세요.",
-                                      preferredStyle: .alert)
+        let transparentViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddDataViewController")
         
-        alert.addTextField{ $0.placeholder = "to do" }
+        // 뷰 컨트롤러의 전환 스타일 설정 (모달, 밑에서 위로 올라오는 애니메이션)
+        transparentViewController.modalPresentationStyle = .overFullScreen
+        transparentViewController.modalTransitionStyle = .coverVertical
         
-        // 얼럿 창의 확인 버튼
-        alert.addAction(UIAlertAction(title: "확인",
-                                      style: .default,
-                                      handler: { _ in
-            guard let text = alert.textFields?[0].text else {return}
-            if text != "" {
-                self.dataManager.saveTodoListData(todoTitle: text) {
-                    print("저장완료")
-                }
-                self.tableview.reloadData()
-            }
-        }))
+        // ViewController 전환
+        present(transparentViewController, animated: true, completion: nil)
         
-        // 얼럿 창의 취소 버튼
-        alert.addAction(UIAlertAction(title: "취소",
-                                      style: .cancel,
-                                      handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -222,8 +212,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             self.cellButtonAction?(indexPath)
         }
         
-        // cell이 선택이 되지 않도록 설정
-        cell.selectionStyle = .none
+        // Editing 모드에 따라 cell 선택 미선택 조정
+        if self.tableview.isEditing {
+            cell.selectionStyle = .default
+        }else {
+            cell.selectionStyle = .none
+        }
         
         return cell
     }
@@ -258,69 +252,83 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    // editing 모드에서의 row 이동
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let sourcetodoData = dataManager.getTodoListCoreData(pagedate)[sourceIndexPath.row]
-        let destinationtodoData = dataManager.getTodoListCoreData(pagedate)[destinationIndexPath.row]
-        
-        // cell의 row 변화
-        self.dataManager.updatePriorityCoreData(moveRowAt: sourcetodoData, to: destinationtodoData)
-        
-        self.tableview.reloadData()
-    }
+//    // editing 모드에서의 row 이동
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        
+//        let sourcetodoData = dataManager.getTodoListCoreData(pagedate)[sourceIndexPath.row]
+//        let destinationtodoData = dataManager.getTodoListCoreData(pagedate)[destinationIndexPath.row]
+//        
+//        // cell의 row 변화
+//        self.dataManager.updatePriorityCoreData(moveRowAt: sourcetodoData, to: destinationtodoData)
+//        
+//        self.tableview.reloadData()
+//    }
     
+    // 테이블 셀을 클릭할 시 수정 화면
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function)
+        
+        guard let AddDataViewController = storyboard?.instantiateViewController(withIdentifier: "AddDataViewController") as? AddDataViewController else { return }
+        
+        AddDataViewController.todoData = self.dataManager.getTodoListCoreData(self.pagedate)[indexPath.row]
+        
+        AddDataViewController.modalPresentationStyle = .overFullScreen
+        AddDataViewController.modalTransitionStyle = .coverVertical
+        
+        present(AddDataViewController, animated: true, completion: nil)
+        
+    }
     
     // MARK: - Revise 구현
     
-    // 기본 모드에서 왼쪽으로 슬라이스
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        // UIContextualAction
-        let revise = UIContextualAction(style: .normal, title: "revise") { (action, view, completion: @escaping (Bool) -> Void ) in
-            
-            // 편집 동작 구현
-            let alert = UIAlertController(title: "수정",
-                                          message: "to do를 수정해 주세요.",
-                                          preferredStyle: .alert)
-            
-            alert.addTextField{ $0.placeholder = "to do" }
-            
-            // 얼럿 창의 확인 버튼
-            alert.addAction(UIAlertAction(title: "확인",
-                                          style: .default,
-                                          handler: { _ in
-                
-                let modifiedtodoData = self.dataManager.getTodoListCoreData(self.pagedate)[indexPath.row]
-                guard let text = alert.textFields?[0].text else {return}
-                if text != "" {
-                    
-                    // cell의 title 수정
-                    self.dataManager.updateTodoListData(text, modifiedtodoData)
-                    
-                    self.tableview.reloadData()
-                }
-            }))
-            
-            // 얼럿 창의 최소 버튼
-            alert.addAction(UIAlertAction(title: "취소",
-                                          style: .cancel,
-                                          handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-
-            
-            
-            print("edit 클릭 됨")
-            completion(true)
-        }
-        
-        // 이미지 / 백그라운드 설정
-        revise.image = UIImage(systemName: "pencil")
-        revise.backgroundColor = .systemGreen
-        
-        return UISwipeActionsConfiguration(actions: [revise])
-    }
+//    // 기본 모드에서 왼쪽으로 슬라이스
+//    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        
+//        // UIContextualAction
+//        let revise = UIContextualAction(style: .normal, title: "revise") { (action, view, completion: @escaping (Bool) -> Void ) in
+//            
+//            // 편집 동작 구현
+//            let alert = UIAlertController(title: "수정",
+//                                          message: "to do를 수정해 주세요.",
+//                                          preferredStyle: .alert)
+//            
+//            alert.addTextField{ $0.placeholder = "to do" }
+//            
+//            // 얼럿 창의 확인 버튼
+//            alert.addAction(UIAlertAction(title: "확인",
+//                                          style: .default,
+//                                          handler: { _ in
+//                
+//                let modifiedtodoData = self.dataManager.getTodoListCoreData(self.pagedate)[indexPath.row]
+//                guard let text = alert.textFields?[0].text else {return}
+//                if text != "" {
+//                    
+//                    // cell의 title 수정
+//                    self.dataManager.updateTodoListData(text, modifiedtodoData)
+//                    
+//                    self.tableview.reloadData()
+//                }
+//            }))
+//            
+//            // 얼럿 창의 최소 버튼
+//            alert.addAction(UIAlertAction(title: "취소",
+//                                          style: .cancel,
+//                                          handler: nil))
+//            
+//            self.present(alert, animated: true, completion: nil)
+//
+//            
+//            
+//            print("edit 클릭 됨")
+//            completion(true)
+//        }
+//        
+//        // 이미지 / 백그라운드 설정
+//        revise.image = UIImage(systemName: "pencil")
+//        revise.backgroundColor = .systemGreen
+//        
+//        return UISwipeActionsConfiguration(actions: [revise])
+//    }
 }
 
 

@@ -32,19 +32,12 @@ class ListDataManager {
     let now = Date()
     let formatter = DateFormatter()
     
-    
-    // priority 저장
-    static var priority = 0
-    
-    
     // MARK: - (Get) 날짜에 따른 TodoDate 배열
     
     func getTodoListCoreData(_ Date: String) -> [TodoData] {
-        
-        var todoListDataArray: [TodoData] = []
-        
+
         guard let todoListDataArray = fetchDataByDate()[Date] as? [TodoData] else {
-            return todoListDataArray
+            return []
         }
         
         return todoListDataArray
@@ -95,32 +88,52 @@ class ListDataManager {
     
     
     // MARK: - (save) 새로운 데이터 저장
-    
-    func saveTodoListData(todoTitle: String?, completion: @escaping () -> Void){
-        
+    func saveTodoListData(todoTitle: String, todoDate: Date, completion: @escaping () -> Void) {
         if let context = context {
+            // 저장된 데이터 중 가장 큰 priority 값을 가져오는 쿼리
+            let fetchRequest: NSFetchRequest<TodoData> = TodoData.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "priority", ascending: false)]
+            fetchRequest.fetchLimit = 1
             
-            if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
-                
-                if let todoData = NSManagedObject(entity: entity, insertInto: context) as? TodoData {
+            do {
+                let result = try context.fetch(fetchRequest)
+                if let lastTodoData = result.first {
+                    // 마지막으로 저장된 데이터의 priority 값 + 1을 새로운 데이터의 priority로 설정
+                    let newPriority = lastTodoData.priority + 1
                     
-                    // 새로운 데이터의 요소
-                    todoData.title = todoTitle
-                    todoData.id = UUID()
-                    todoData.isChecked = false
-                    todoData.date = Date()
-                    todoData.priority = Int64(ListDataManager.priority)
-                    
-                    // 생성된 데이터의 개수 증가 ( 정렬 )
-                    ListDataManager.priority += 1
-                    appDelegate?.saveContext()
+                    if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
+                        if let todoData = NSManagedObject(entity: entity, insertInto: context) as? TodoData {
+                            todoData.title = todoTitle
+                            todoData.id = UUID()
+                            todoData.isChecked = false
+                            todoData.date = todoDate
+                            todoData.priority = newPriority // 새로운 데이터의 priority 설정
+                            
+                            // 생성된 데이터의 개수 증가 ( 정렬 )
+                            appDelegate?.saveContext()
+                        }
+                    }
+                } else {
+                    // 저장된 데이터가 없는 경우, priority를 1로 설정하여 새로운 데이터 저장
+                    if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
+                        if let todoData = NSManagedObject(entity: entity, insertInto: context) as? TodoData {
+                            todoData.title = todoTitle
+                            todoData.id = UUID()
+                            todoData.isChecked = false
+                            todoData.date = todoDate
+                            todoData.priority = 1 // 새로운 데이터의 priority를 1로 설정
+                            
+                            // 생성된 데이터의 개수 증가 ( 정렬 )
+                            appDelegate?.saveContext()
+                        }
+                    }
                 }
+            } catch {
+                print("Error fetching todo data: \(error)")
             }
         }
-        
         completion()
     }
-    
     
     
     // MARK: - (delete) 데이터 삭제
@@ -187,12 +200,13 @@ class ListDataManager {
     }
     
     
-   // MARK: - (Update) 제목 수정
+   // MARK: - (Update) 제목, 날짜 수정
     
-    func updateTodoListData(_ todoTitle: String, _ todoDataId: TodoData) {
+    func updateTodoListData(todoTitle: String, todoDate: Date, todoDataId: TodoData, completion: @escaping () -> Void) {
         
         // 수정할 title 내용
         let modifiedTitle = todoTitle
+        let modifiedDate = todoDate
         
         guard let modifiedManagedObject = fetchManagedObject(todoDataId) else {
             print("Failed to fetch managed objects.")
@@ -200,6 +214,7 @@ class ListDataManager {
         }
         
         modifiedManagedObject.setValue(modifiedTitle, forKey: "title")
+        modifiedManagedObject.setValue(modifiedDate, forKey: "date")
         
         // 변경 사항 저장
         do {
