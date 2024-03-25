@@ -78,13 +78,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="44.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-LF-ubR" userLabel="checkbox">
+                                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-LF-ubR" userLabel="checkbox">
                                                     <rect key="frame" x="10" y="5" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="6Ut-4v-EVh"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Hv4-f6-PLm"/>
                                                         <constraint firstAttribute="width" secondItem="g0D-LF-ubR" secondAttribute="height" multiplier="1:1" id="mrG-ac-TQb"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.3058823645" green="0.32156863810000003" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" backgroundImage="checkbox"/>
                                                     <state key="selected" backgroundImage="check (1)"/>
@@ -94,10 +95,10 @@
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="TodoTableViewCell" text="text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-u3-bfU" userLabel="Todo Text">
                                                     <rect key="frame" x="55" y="5" width="339" height="35"/>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
+                                                    <color key="textColor" red="0.3058823645" green="0.32156863810000003" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="highlightedColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -180,7 +181,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="USc-WX-LAA"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="25"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WO5-JG-2vd" userLabel="Todo Title Stack View">
@@ -189,7 +190,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✏️ Todo Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vv-U2-6x8" userLabel="Todo Title">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="19.666666666666668"/>
                                                         <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FKO-AA-zrh">
@@ -208,11 +209,12 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📅 Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46j-pa-bfa">
                                                         <rect key="frame" x="0.0" y="0.0" width="224.33333333333334" height="50"/>
                                                         <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <datePicker contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="hli-Ip-Bbm">
                                                         <rect key="frame" x="236.33333333333331" y="0.0" width="137.66666666666669" height="50"/>
+                                                        <color key="tintColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <date key="minimumDate" timeIntervalSinceReferenceDate="694263600">
                                                             <!--2023-01-01 11:00:00 +0000-->
                                                         </date>
@@ -230,7 +232,7 @@
                                                 <rect key="frame" x="10" y="228.66666666666663" width="374" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎨 Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jq-fY-Ntw">
-                                                        <rect key="frame" x="0.0" y="30.333333333333371" width="112.33333333333334" height="19.666666666666671"/>
+                                                        <rect key="frame" x="0.0" y="30.333333333333371" width="112.33333333333333" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Baskerville-SemiBold" family="Baskerville" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -245,8 +247,10 @@
                                                     </view>
                                                     <pickerView clipsSubviews="YES" tag="9" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="t36-F2-Muv">
                                                         <rect key="frame" x="135.33333333333337" y="0.0" width="238.66666666666663" height="80"/>
+                                                        <color key="tintColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </pickerView>
                                                 </subviews>
+                                                <color key="tintColor" red="0.20392158630000001" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstItem="ghu-9a-3Fd" firstAttribute="top" secondItem="8QB-m8-OFS" secondAttribute="top" constant="20" id="596-iH-AwI"/>
                                                     <constraint firstAttribute="height" constant="80" id="Hz5-lh-0ot"/>

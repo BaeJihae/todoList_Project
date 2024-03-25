@@ -195,7 +195,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         // dataManager를 통한 코어데이터 받아오기
         let toDoData = dataManager.getTodoListCoreData(pagedate)
-        print(toDoData)
         cell.toDoData = toDoData[indexPath.row]
         
         // cell로 indexPath 값 넘겨주기
@@ -203,12 +202,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             self.cellButtonAction?(indexPath)
         }
         
-        // Editing 모드에 따라 cell 선택 미선택 조정
-        if self.tableview.isEditing {
-            cell.selectionStyle = .default
-        }else {
-            cell.selectionStyle = .none
-        }
+        cell.selectionStyle = .none
         
         return cell
     }
