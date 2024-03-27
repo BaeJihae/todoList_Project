@@ -13,7 +13,6 @@ class DateToDoCell: UITableViewCell {
     @IBOutlet weak var isCheckedButton: UIButton!
     
     let dataManager = ListDataManager.shared
-    var buttonAction: (() -> Void)?
     
     // ToDoData를 전달받을 변수
     var toDoData: TodoData? {
@@ -33,6 +32,24 @@ class DateToDoCell: UITableViewCell {
         }
         setTableViewCell()
     }
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Cell 간격 조정
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6))
+    }
+
     
     func setTableViewCell() {
         if let ischecked = toDoData?.isChecked {

@@ -71,11 +71,11 @@
 		2E02F0462BB25BE10050948C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2E02F04B2BB2B27E0050948C /* ToDoListViewController.swift */,
 				2EE60C762BA8034E00FBC480 /* ViewController.swift */,
+				2EE60C882BA827A600FBC480 /* TodoTableViewCell.swift */,
 				2E924CC42BAD2B25000D06E3 /* AddDataViewController.swift */,
 				2E0E2AAE2BAC9292000DB1C7 /* CalendarViewController.swift */,
-				2EE60C882BA827A600FBC480 /* TodoTableViewCell.swift */,
+				2E02F04B2BB2B27E0050948C /* ToDoListViewController.swift */,
 				2E02F04D2BB2B2DB0050948C /* DateToDoCell.swift */,
 			);
 			path = Controller;
