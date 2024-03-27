@@ -14,30 +14,29 @@ class ToDoListViewController: UIViewController {
     @IBOutlet weak var dateTableView: UITableView!
     @IBOutlet weak var backgroundView: UIView!
 
-    
-    var selectedDate: Date?
-    var todoData: TodoData?
     let dataManager = ListDataManager.shared
+    var selectedDate: Date?
+    var todoData: [TodoData]?
+    
     
     // 셀에 버튼 클릭 이벤트에 대한 클로저 정의
     var cellAction: ((IndexPath) -> Void)?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setData()
         setBackgroundView()
-        
-        todayDateLabel.text = selectedDate?.toString()
-        
-        // 터치 감지용 UITapGestureRecognizer 생성
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleOutsideTap))
-        self.view.addGestureRecognizer(tapGesture)
+        setTodayDateLabel()
+        setDateTableView()
+        setTapGesture()
+        dateTableView.reloadData()
     }
     
     
-    // 바깥쪽 영역 터치 시 호출될 메서드
-    @objc func handleOutsideTap() {
-        dismiss(animated: true, completion: nil)
+    func setData() {
+        guard let selectedDate = selectedDate else { return }
+        todoData = dataManager.getTodoListCoreData(selectedDate.toString())
     }
     
     
@@ -51,38 +50,53 @@ class ToDoListViewController: UIViewController {
     }
     
     
+    func setTodayDateLabel() {
+        todayDateLabel.text = selectedDate?.toString()
+    }
+    
+    
+    func setDateTableView() {
+        dateTableView.delegate = self
+        dateTableView.dataSource = self
+        
+        dateTableView.estimatedRowHeight = 60.0
+        dateTableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    
+    func setTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleOutsideTap))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    
+    // 바깥쪽 영역 터치 시 호출될 메서드
+    @objc func handleOutsideTap() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     // 버튼 눌렀을 때 해당 todoList로 이동
     @IBAction func goToTodoButtonTapped(_ sender: UIButton) {
         
     }
 }
-
 extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let selectedDate = selectedDate else { return 0 }
         return dataManager.getTodoListCoreData(selectedDate.toString()).count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = dateTableView.dequeueReusableCell(withIdentifier: "DateToDoCell", for: indexPath) as! DateToDoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DateToDoCell", for: indexPath) as! DateToDoCell
         
-        // dataManager를 통한 코어데이터 받아오기
-        if let selectedDate = selectedDate {
-            let toDoData = dataManager.getTodoListCoreData(selectedDate.toString())
-            cell.toDoData = toDoData[indexPath.row]
-            
-            // cell로 indexPath 값 넘겨주기
-            cell.buttonAction = {
-                self.cellAction?(indexPath)
-            }
-            
-            cell.selectionStyle = .none
-        }
+        guard let selectedDate = selectedDate else { return cell }
+        guard let todoData = todoData else { return cell }
+        
+        cell.todoLabel.text = todoData[indexPath.row].title
+        cell.isCheckedButton.isSelected = todoData[indexPath.row].isChecked
+        
         return cell
     }
-    
 }
