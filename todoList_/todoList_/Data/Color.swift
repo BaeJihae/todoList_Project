@@ -9,74 +9,103 @@ import Foundation
 import UIKit
 
 enum Color: Int {
-    case coralPink   = 0
-    case oldCountry  = 1
-    case hibiscus    = 2
-    case calamine    = 3
-    case watery      = 4
-    case breezy      = 5
-    case oceanAir    = 6
-    case polarWhite  = 7
-    case teresaGreen = 8
-    case bathSalts   = 9
-    case wytheBlue   = 10
-    case seaFoam     = 11
+    case color0  = 0
+    case color1  = 1
+    case color2  = 2
+    case color3  = 3
+    case color4  = 4
+    case color5  = 5
+    case color6  = 6
+    case color7  = 7
+    case color8  = 8
+    case color9  = 9
+    case color10 = 10
+    case color11 = 11
     
     var backgoundColor: UIColor {
         switch self {
-        case .coralPink:
-            return UIColor(red: 234/255, green: 125/255, blue: 112/255, alpha: 1.0)
-        case .oldCountry:
-            return UIColor(red: 255/255, green: 175/255, blue: 110/255, alpha: 1.0)
-        case .hibiscus:
-            return UIColor(red: 255/255, green: 204/255, blue: 128/255, alpha: 1.0)
-        case .calamine:
-            return UIColor(red: 188/255, green: 192/255, blue: 123/255, alpha: 1.0)
-        case .watery:
-            return UIColor(red: 171/255, green: 205/255, blue: 222/255, alpha: 1.0)
-        case .breezy:
-            return UIColor(red: 213/255, green: 237/255, blue: 248/255, alpha: 1.0)
-        case .oceanAir:
-            return UIColor(red: 213/255, green: 226/255, blue: 211/255, alpha: 1.0)
-        case .polarWhite:
-            return UIColor(red: 154/255, green: 129/255, blue: 176/255, alpha: 1.0)
-        case .teresaGreen:
-            return UIColor(red: 142/255, green: 113/255, blue: 91/255, alpha: 1.0)
-        case .bathSalts:
-            return UIColor(red: 201/255, green: 169/255, blue: 141/255, alpha: 1.0)
-        case .wytheBlue:
-            return UIColor(red: 255/255, green: 169/255, blue: 186/255, alpha: 1.0)
-        case .seaFoam:
-            return UIColor(red: 241/255, green: 236/255, blue: 234/255, alpha: 1.0)
+        case .color0:
+            return UIColor(red: 203/255, green: 190/255, blue: 184/255, alpha: 0.8)
+        case .color1:
+            return UIColor(red: 222/255, green: 221/255, blue: 215/255, alpha: 0.8)
+        case .color2:
+            return UIColor(red: 229/255, green: 222/255, blue: 213/255, alpha: 0.8)
+        case .color3:
+            return UIColor(red: 232/255, green: 222/255, blue: 223/255, alpha: 0.8)
+        case .color4:
+            return UIColor(red: 216/255, green: 212/255, blue: 204/255, alpha: 0.8)
+        case .color5:
+            return UIColor(red: 209/255, green: 206/255, blue: 197/255, alpha: 0.8)
+        case .color6:
+            return UIColor(red: 234/255, green: 232/255, blue: 225/255, alpha: 0.8)
+        case .color7:
+            return UIColor(red: 197/255, green: 202/255, blue: 197/255, alpha: 0.8)
+        case .color8:
+            return UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 0.8)
+        case .color9:
+            return UIColor(red: 226/255, green: 220/255, blue: 208/255, alpha: 0.8)
+        case .color10:
+            return UIColor(red: 202/255, green: 206/255, blue: 207/255, alpha: 0.8)
+        case .color11:
+            return UIColor(red: 204/255, green: 201/255, blue: 198/255, alpha: 0.8)
         }
     }
     
     var description: String {
         switch self {
-        case .coralPink:
+        case .color0:
             return "Daily"
-        case .oldCountry:
+        case .color1:
             return "Study"
-        case .hibiscus:
-            return "Fitness"
-        case .calamine:
-            return "Finance"
-        case .watery:
-            return "Home"
-        case .breezy:
+        case .color2:
             return "Work"
-        case .oceanAir:
-            return "Hobbies"
-        case .polarWhite:
-            return "Travel"
-        case .teresaGreen:
-            return "Education"
-        case .bathSalts:
-            return "Social"
-        case .wytheBlue:
-            return "Family"
-        case .seaFoam:
+        case .color3:
+            return "Meeting"
+        case .color4:
+            return "Cooking"
+        case .color5:
+            return "Health"
+        case .color6:
+            return "Gift"
+        case .color7:
+            return "Ideas"
+        case .color8:
+            return "Payment"
+        case .color9:
+            return "Shopping"
+        case .color10:
+            return "Medical"
+        case .color11:
             return "Miscellaneous"
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .color0:
+            return "house"
+        case .color1:
+            return "text.book.closed"
+        case .color2:
+            return "building.2"
+        case .color3:
+            return "calendar"
+        case .color4:
+            return "carrot"
+        case .color5:
+            return "dumbbell"
+        case .color6:
+            return "gift"
+        case .color7:
+            return "lightbulb.max"
+        case .color8:
+            return "dollarsign.circle"
+        case .color9:
+            return "cart"
+        case .color10:
+            return "cross.case"
+        case .color11:
+            return "pencil.and.scribble"
         }
     }
 }

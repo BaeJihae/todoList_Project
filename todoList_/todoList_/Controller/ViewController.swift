@@ -44,11 +44,12 @@ class ViewController: UIViewController {
         print(#function)
         tableview.reloadData()
     }
-
+    
     // 화면을 전환할 때마다 다시 테이블뷰 그리기
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableview.reloadData()
+        date.text = pagedate
     }
     
     
@@ -84,11 +85,9 @@ class ViewController: UIViewController {
     
     // 기본 날짜 오늘로 설정하기
     func setDate() {
-        let now = Date()
-        let formatter = DateFormatter()
         
-        formatter.dateFormat = "yy.MM.dd"
-        pagedate = formatter.string(from: now)
+        let now = Date()
+        pagedate = now.toString()
         
         // UILabel 설정
         date.text = pagedate

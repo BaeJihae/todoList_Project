@@ -11,6 +11,7 @@ class TodoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var todoText: UILabel!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var categoryIcon: UIButton!
     
     let dataManager = ListDataManager.shared
     var buttonAction: (() -> Void)?
@@ -26,7 +27,9 @@ class TodoTableViewCell: UITableViewCell {
     func configureUIwithData() {
         todoText.text = toDoData?.title
         if let toDoData = toDoData {
-            if let color = Color(rawValue: Int(toDoData.color)) {
+            if let color = Color(rawValue: Int(toDoData.color)){
+                categoryIcon.setImage( UIImage(systemName: color.icon), for: .normal)
+                categoryIcon.tintColor = .darkGray
                 contentView.backgroundColor = color.backgoundColor
                 contentView.layer.cornerRadius = 20
                 contentView.layer.masksToBounds = true

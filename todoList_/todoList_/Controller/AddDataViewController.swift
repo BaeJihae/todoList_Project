@@ -27,11 +27,11 @@ class AddDataViewController: UIViewController{
     
     let dataManager = ListDataManager.shared
     var todoData: TodoData?
-    var selectedColor: Color = .coralPink
+    var selectedColor: Color = .color0
     
     
     // 피커뷰에 들어갈 색상
-    let colors: [Color] = [.coralPink, .oldCountry, .hibiscus, .calamine, .watery, .breezy, .oceanAir, .polarWhite, .teresaGreen, .bathSalts, .wytheBlue, .seaFoam]
+    let colors: [Color] = [.color0, .color1, .color2, .color3, .color4, .color5, .color6, .color7, .color8, .color9, .color10, .color11]
     
     
     override func viewDidLoad() {

@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController, UICalendarViewDelegate {
     
     var selectedDate: DateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date())
     
+    var dataManager = ListDataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

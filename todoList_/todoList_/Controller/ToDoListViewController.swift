@@ -86,13 +86,23 @@ class ToDoListViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func goToButtonTapped(_ sender: UIButton) {
-        //화면전환버튼
-        guard let nextViewController = self.storyboard?.instantiateViewController(identifier: "ViewController") else {return}
-        nextViewController.modalTransitionStyle = .coverVertical
-        self.present(nextViewController, animated: true)
         
+        dismiss(animated: true, completion: nil)
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let sceneDelegate = windowScene.delegate as? SceneDelegate,
+              let tabBarController = sceneDelegate.window?.rootViewController as? UITabBarController else {
+            return
+        }
+        
+        if let NavigationViewController = tabBarController.viewControllers?[1] as? UINavigationController {
+            let destinationVC = NavigationViewController.viewControllers[0] as! ViewController
+            guard let selectedDate = selectedDate else { return }
+            destinationVC.pagedate = selectedDate.toString()
+        }
+        
+        tabBarController.selectedIndex = 1
     }
 }
 extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {

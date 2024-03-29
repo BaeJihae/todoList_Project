@@ -87,6 +87,19 @@ class ListDataManager {
         return [:]
     }
     
+    // 클로저 함수를 파라미터로 받아 해당 날짜에 이모티콘을 표시하는 함수
+    func showEmojiIfAllChecked(emojiDisplayClosure: (String) -> Void ) {
+        let todoListDataByDate = fetchDataByDate()
+        
+        for (dateString, todoDataArray) in todoListDataByDate {
+            let allChecked = todoDataArray.allSatisfy { ($0 as? TodoData)?.isChecked ?? false }
+            
+            if allChecked {
+                // 클로저 함수를 호출하여 해당 날짜에 이모티콘 표시
+                emojiDisplayClosure(dateString)
+            }
+        }
+    }
     
     // MARK: - (save) 새로운 데이터 저장
     func saveTodoListData(todoTitle: String, todoDate: Date, todoColor: Int16, completion: @escaping () -> Void) {
@@ -274,10 +287,10 @@ class ListDataManager {
             print("Failed to fetch managed objects.")
             return
         }
-
+        
         // 가져온 데이터의 속성 업데이트
         todoManagedObject.setValue(ischecked, forKey: "isChecked")
-
+        
         // 변경 사항 저장
         do {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
