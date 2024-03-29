@@ -11,6 +11,7 @@ class DateToDoCell: UITableViewCell {
 
     @IBOutlet weak var todoLabel: UILabel!
     @IBOutlet weak var isCheckedButton: UIButton!
+    @IBOutlet weak var categoryIcon: UIButton!
     
     let dataManager = ListDataManager.shared
     
@@ -25,6 +26,8 @@ class DateToDoCell: UITableViewCell {
         todoLabel.text = toDoData?.title
         if let toDoData = toDoData {
             if let color = Color(rawValue: Int(toDoData.color)) {
+                categoryIcon.setImage( UIImage(systemName: color.icon), for: .normal)
+                categoryIcon.tintColor = .darkGray
                 contentView.backgroundColor = color.backgoundColor
                 contentView.layer.cornerRadius = 20
                 contentView.layer.masksToBounds = true
