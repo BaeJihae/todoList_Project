@@ -70,9 +70,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="373" height="44.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-LF-ubR" userLabel="checkbox">
+                                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-LF-ubR" userLabel="checkbox">
                                                     <rect key="frame" x="10" y="5" width="35" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="g0D-LF-ubR" secondAttribute="height" multiplier="1:1" id="bf3-yy-1Zw"/>
+                                                        <constraint firstAttribute="height" constant="35" id="kiU-b0-hUK"/>
+                                                    </constraints>
                                                     <color key="tintColor" red="0.3058823645" green="0.32156863810000003" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" backgroundImage="checkbox"/>
@@ -81,17 +84,19 @@
                                                         <action selector="checkButtonTapped:" destination="0we-Ib-ENV" eventType="touchUpInside" id="zf5-Bj-w4I"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="TodoTableViewCell" text="text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-u3-bfU" userLabel="Todo Text">
-                                                    <rect key="frame" x="55" y="5" width="268" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="TodoTableViewCell" text="text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-u3-bfU" userLabel="Todo Text">
+                                                    <rect key="frame" x="55" y="11.333333333333336" width="263" height="22"/>
                                                     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Charter-Roman" family="Charter" pointSize="18"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="highlightedColor" red="0.4196078479" green="0.3803921938" blue="0.30980393290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wir-p4-Rzg">
-                                                    <rect key="frame" x="333" y="12.333333333333336" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wir-p4-Rzg">
+                                                    <rect key="frame" x="328" y="10" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="VYZ-S0-218"/>
+                                                        <constraint firstAttribute="width" secondItem="wir-p4-Rzg" secondAttribute="height" multiplier="1:1" id="XjN-ro-sDP"/>
+                                                    </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal">
                                                         <imageReference key="image" image="house" catalog="system" symbolScale="small" renderingMode="hierarchical-single">
@@ -104,6 +109,15 @@
                                                     </state>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wir-p4-Rzg" firstAttribute="leading" secondItem="ArF-u3-bfU" secondAttribute="trailing" constant="10" id="GM1-J9-woP"/>
+                                                <constraint firstItem="ArF-u3-bfU" firstAttribute="centerY" secondItem="1hn-HV-inl" secondAttribute="centerY" id="HfA-sj-aL1"/>
+                                                <constraint firstItem="g0D-LF-ubR" firstAttribute="leading" secondItem="1hn-HV-inl" secondAttribute="leading" constant="10" id="ZOJ-88-c8v"/>
+                                                <constraint firstItem="ArF-u3-bfU" firstAttribute="leading" secondItem="g0D-LF-ubR" secondAttribute="trailing" constant="10" id="c9S-ij-mXS"/>
+                                                <constraint firstAttribute="trailing" secondItem="wir-p4-Rzg" secondAttribute="trailing" constant="20" id="crN-Ml-luS"/>
+                                                <constraint firstItem="wir-p4-Rzg" firstAttribute="centerY" secondItem="1hn-HV-inl" secondAttribute="centerY" id="jNI-ys-lDz"/>
+                                                <constraint firstItem="g0D-LF-ubR" firstAttribute="centerY" secondItem="1hn-HV-inl" secondAttribute="centerY" id="wB3-ev-Pbq"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96078431610000004" green="0.96078431610000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
